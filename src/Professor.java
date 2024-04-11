@@ -9,6 +9,9 @@ public class Professor extends Person {
         this.officeNumber = officeNumber;
     }
 
+    public Professor(String firstName, String lastName, String department, String officeNumber) {
+    }
+
     public String getDepartment() {
         return this.department;
     }

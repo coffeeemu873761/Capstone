@@ -11,6 +11,10 @@ public class Student extends Person {
         this.enrolledCourses = new ArrayList<>();
     }
 
+    public Student(String firstName, String lastName, int id) {
+
+    }
+
     public int getId() {
 
         return this.id;
