@@ -1,16 +1,16 @@
 import java.util.*;
 
-public class CourseE {
+public class Course{
     private String deptName;
     private String title;
     private int credits;
     private int maxStudents;
     private int currentStudents;
-    private HashSet<StudentE> enrolledStudents;
-    private LinkedList<StudentE> waitlist;
+    private HashSet<Student> enrolledStudents;
+    private LinkedList<Student> waitlist;
     private boolean full;
 
-    public CourseE(String deptName, String title, int credits, int maxStudents) {
+    public Course(String deptName, String title, int credits, int maxStudents) {
         this.deptName = deptName;
         this.title = title;
         this.credits = credits;
@@ -27,7 +27,7 @@ public class CourseE {
         return (title);
     }
 
-    public void addStudent(StudentE student) {
+    public void addStudent(Student student) {
         if (currentStudents < maxStudents) {
             enrolledStudents.add(student); //adds student to course
             currentStudents++;
@@ -43,7 +43,7 @@ public class CourseE {
         }
     }
 
-    public void dropStudent(StudentE student) {
+    public void dropStudent(Student student) {
         if (enrolledStudents.contains(student)) {
             enrolledStudents.remove(student); //drops student from course
             currentStudents--;
@@ -67,17 +67,17 @@ public class CourseE {
     }
 
     public void getEnrolledStudents() {
-        Iterator<StudentE> i = enrolledStudents.iterator();
+        Iterator<Student> i = enrolledStudents.iterator();
         while (i.hasNext()) {
-            StudentE v = i.next();
+            Student v = i.next();
             System.out.print(v.firstName + " " + v.lastName + ", ");
         }
     }
 
     public void getWaitlist() {
-        Iterator<StudentE> j = waitlist.iterator();
+        Iterator<Student> j = waitlist.iterator();
         while (j.hasNext()) {
-            StudentE k = j.next();
+            Student k = j.next();
             System.out.print(k.firstName + " " + k.lastName + ", ");
         }
     }
