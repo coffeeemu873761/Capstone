@@ -11,11 +11,18 @@ public class GroceryList {
     }
 
     public GroceryList() {
-
     }
 
     public void addItemOrder(GroceryItemOrder itemOrder) {
         items.add(itemOrder);
+    }
+
+    public double getListPrice() {
+        double totalPrice = 0.0;
+        for (GroceryItemOrder itemOrder : items) {
+            totalPrice += itemOrder.getQuantity() * store.getItemPrice(itemOrder.getItem());
+        }
+        return totalPrice;
     }
 
     public ArrayList<GroceryItemOrder> getItems() {

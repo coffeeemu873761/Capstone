@@ -14,6 +14,10 @@ public class Undergrad extends Student {
         this.level = level;
     }
 
+    public Undergrad(String firstName, String lastName, int id) {
+        super(firstName,lastName);
+    }
+
 
     public enum Level {
         FRESHMAN, SOPHOMORE, JUNIOR, SENIOR
@@ -21,5 +25,9 @@ public class Undergrad extends Student {
 
     public String toString() {
         return "Undergrad Student: " + this.getFirstName() + " " + this.getLastName() + ", " + this.getId() + ", " + this.getDOE();
+    }
+
+    public double GetDiscount() {
+        return this.discountRate;
     }
 }

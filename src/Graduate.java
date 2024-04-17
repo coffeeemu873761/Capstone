@@ -14,4 +14,8 @@ public class Graduate extends Student {
     public String toString() {
         return "Graduate Student: " + this.getFirstName() + " " + this.getLastName() + ", " + this.getId() + ", " + this.getDOE();
     }
+
+    public double GetDiscount() {
+        return this.discountRate;
+    }
 }

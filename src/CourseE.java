@@ -6,6 +6,7 @@ public class CourseE {
     private int credits;
     private int maxStudents;
     private int currentStudents;
+
     private HashSet<StudentE> enrolledStudents;
     private LinkedList<StudentE> waitlist;
     private boolean full;

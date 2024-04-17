@@ -15,6 +15,12 @@ public class Student extends Person {
 
     }
 
+    public Student(String firstName, String lastName) {
+    }
+
+    public Student(String firstName, String lastName, int id, int day, int month, int year) {
+    }
+
     public int getId() {
 
         return this.id;

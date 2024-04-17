@@ -60,7 +60,7 @@ public class Person implements Shopper {
 
 
     public double GetDiscount() {
-        return discountRate;
+        return this.discountRate;
     }
 
 
@@ -90,7 +90,7 @@ public class Person implements Shopper {
     }
 
     private double applyDiscount() {
-        double totalPrice = this.groceryList.getTotalPrice();
+        double totalPrice = this.groceryList.getListPrice();
         totalPrice = totalPrice - this.GetDiscount() * totalPrice;
         return totalPrice;
     }
