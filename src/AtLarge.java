@@ -4,6 +4,10 @@ public class AtLarge extends Student {
         super(firstName, lastName, id, day, month, year);
     }
 
+    public AtLarge(String firstName, String lastName) {
+        super(firstName,lastName);
+    }
+
     public String toString() {
         return "AtLarge: " + this.getFirstName() + " " + this.getLastName() + ", " + this.getId() + ", " + this.getDOE();
     }

@@ -1,3 +1,6 @@
+
+import java.util.Objects;
+import java.util.Scanner;
 public class GroceryTester {
     public static void main(String[] args) {
         // Create GroceryStores
@@ -26,55 +29,106 @@ public class GroceryTester {
         WholeFoods.stockItem(item2, 1.75);
 
 
-        Undergrad Davide = new Undergrad("Mazzucco", "Davide", 7628, 12, 3, 2002, Undergrad.Level.JUNIOR);
-        Graduate Angelo = new Graduate("Mazzucco", "Angelo", 8756, 20, 11, 2000);
-
-        Davide.startGroceryList(Marianos);
-        Angelo.startGroceryList(WholeFoods);
-
-        GroceryItemOrder order1 = new GroceryItemOrder(item1, 4);
-        GroceryItemOrder order2 = new GroceryItemOrder(item3, 2);
-        GroceryItemOrder order3 = new GroceryItemOrder(item5, 1);
-        GroceryItemOrder order4 = new GroceryItemOrder(item7, 5);
+        Personquestions(Marianos, WholeFoods);
 
 
-        GroceryItemOrder order22 = new GroceryItemOrder(item6, 3);
-        GroceryItemOrder order33 = new GroceryItemOrder(item4, 2);
-        GroceryItemOrder order44 = new GroceryItemOrder(item2, 4);
-
-
-        Davide.groceryList.addItemOrder(order1);
-        Davide.groceryList.addItemOrder(order2);
-        Davide.groceryList.addItemOrder(order3);
-        Davide.groceryList.addItemOrder(order4);
-        Angelo.groceryList.addItemOrder(order1);
-        Angelo.groceryList.addItemOrder(order1);
-        Angelo.groceryList.addItemOrder(order22);
-        Angelo.groceryList.addItemOrder(order33);
-        Angelo.groceryList.addItemOrder(order44);
-
-
-        displayGroceryListTotal(Davide);
-        displayGroceryListTotal(Angelo);
     }
-
-    private static void displayGroceryListTotal(Person person) {
-        System.out.println(person.getGivenName() + "'s grocery list:");
-        System.out.println("Items:");
-        for (GroceryItemOrder itemOrder : person.groceryList.getItems()) {
-            System.out.println(itemOrder.getItem().getName() + " - Quantity: " + itemOrder.getQuantity() +
-                    ", Price per item: $" + person.groceryList.getStore().getItemPrice(itemOrder.getItem()) +
-                    ", Total Price: $" + itemOrder.getQuantity() * person.groceryList.getStore().getItemPrice(itemOrder.getItem()));
+    public static void Personquestions(GroceryStore store1, GroceryStore store2) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your first name: ");
+        String firstName = scanner.nextLine();
+        System.out.print("Enter your last name: ");
+        String lastName = scanner.nextLine();
+        System.out.print("Enter your position in the university: ");
+        String position = scanner.nextLine();
+        if (position.equals("Professor")) {
+            System.out.print("Enter your department: ");
+            String department = scanner.nextLine();
+            System.out.print("Enter your office number: ");
+            String officeNumber = scanner.nextLine();
+            Professor person = new Professor(firstName, lastName, department, officeNumber);
+            GroceryMaker(person, store1, store2);
+        } else if (position.equals("Student")) {
+            System.out.print("What part of the student body are you: ");
+            String role = scanner.nextLine();
+            if (role.equals("Undergrad")) {
+                System.out.print("What is your id number: ");
+                int id = Integer.parseInt(scanner.nextLine());
+//                System.out.print("What level are you: ");
+//                Undergrad.Level level = Undergrad.Level.valueOf(scanner.nextLine());
+                Undergrad person = new Undergrad(firstName, lastName, id);
+                GroceryMaker(person, store1, store2);
+            } else if (role.equals("Graduate")) {
+                System.out.print("What is your id number: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                Graduate person = new Graduate(firstName, lastName, id);
+                GroceryMaker(person, store1, store2);
+            } else if (role.equals("AtLarge")) {
+                AtLarge person = new AtLarge(firstName, lastName);
+                GroceryMaker(person, store1, store2);
+            } else {
+                System.out.println("No such role in system");
+            }
+        } else {
+            System.out.println("No such position in the university");
         }
-        double totalPriceBeforeDiscount = person.groceryList.getTotalPrice();
-        double totalPriceAfterDiscount = applyDiscount(person);
-        System.out.println("Total Price before discount: $" + totalPriceBeforeDiscount);
-        System.out.println("Total Price after discount: $" + totalPriceAfterDiscount);
     }
 
-    private static double applyDiscount(Person person) {
-        double totalPrice = person.groceryList.getTotalPrice();
-        totalPrice = totalPrice - person.GetDiscount() * totalPrice;
-        return totalPrice;
+
+
+    public static void GroceryMaker(Person person, GroceryStore store1, GroceryStore store2) {
+        boolean truth = true;
+        GroceryStore Usedstore = store1;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("What store do you want to shop at, " + store1.getName() + " or " + store2.getName() + " ? ");
+        String store = scanner.nextLine();
+        if (store.equals(store1.getName())) {
+            person.startGroceryList(store1);
+            store1.printItemsAndPrices();
+
+        } else if (store.equals(store2.getName())) {
+            person.startGroceryList(store2);
+            Usedstore = store2;
+
+        } else {
+            System.out.println("No such store");
+            truth = false;
+        }
+        while (truth) {
+            System.out.print("What do you want to buy? ");
+            String item = scanner.nextLine();
+            System.out.println("How much? ");
+            int number = Integer.parseInt(scanner.nextLine());
+            if (Usedstore.getGroceryItemsName().contains(item)) {
+                GroceryItem GrItem = new GroceryItem(item);
+                GroceryItemOrder order1 = new GroceryItemOrder(GrItem, number);
+                person.getGroceryList().addItemOrder(order1);
+            } else {
+                System.out.println("No such item");
+            }
+            boolean truth1 = true;
+            while (truth1) {
+                System.out.print("Any more items? ");
+                String answer = scanner.nextLine();
+                if (Objects.equals(answer, "no")) {
+                    truth = false;
+                    truth1 = false;
+                } else if (Objects.equals(answer, "yes")) {
+                    truth1 = false;
+                } else {
+                    System.out.println("Answer unclear");
+                }
+            }
+        }
+
+
+        person.displayGroceryListTotal();
     }
-}
+    }
+
+
+
+
+
+
+

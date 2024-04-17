@@ -10,8 +10,19 @@ public class GroceryList {
         this.items = new ArrayList<>();
     }
 
+    public GroceryList() {
+    }
+
     public void addItemOrder(GroceryItemOrder itemOrder) {
         items.add(itemOrder);
+    }
+
+    public double getListPrice() {
+        double totalPrice = 0.0;
+        for (GroceryItemOrder itemOrder : items) {
+            totalPrice += itemOrder.getQuantity() * store.getItemPrice(itemOrder.getItem());
+        }
+        return totalPrice;
     }
 
     public ArrayList<GroceryItemOrder> getItems() {
@@ -22,26 +33,8 @@ public class GroceryList {
         return store;
     }
 
-    public double getTotalPrice() {
-        double totalPrice = 0.0;
-        for (GroceryItemOrder itemOrder : items) {
-            totalPrice += itemOrder.getQuantity() * store.getItemPrice(itemOrder.getItem());
-        }
-        return totalPrice;
-    }
 
 
-    private static void displayGroceryListTotal() {
-        System.out.println(person.getGivenName() + "'s grocery list:");
-        System.out.println("Items:");
-        for (GroceryItemOrder itemOrder : person.groceryList.getItems()) {
-            System.out.println(itemOrder.getItem().getName() + " - Quantity: " + itemOrder.getQuantity() +
-                    ", Price per item: $" + person.groceryList.getStore().getItemPrice(itemOrder.getItem()) +
-                    ", Total Price: $" + itemOrder.getQuantity() * person.groceryList.getStore().getItemPrice(itemOrder.getItem()));
-        }
-        double totalPriceBeforeDiscount = person.groceryList.getTotalPrice();
-        double totalPriceAfterDiscount = applyDiscount(person);
-        System.out.println("Total Price before discount: $" + totalPriceBeforeDiscount);
-        System.out.println("Total Price after discount: $" + totalPriceAfterDiscount);
-    }
+
+
 }
