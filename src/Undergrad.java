@@ -9,15 +9,9 @@ public class Undergrad extends Student {
         this.level = level;
     }
 
-    public Undergrad(String firstName, String lastName, int id, Level level) {
-        super(firstName, lastName, id);
-        this.level = level;
+    public Undergrad(String firstName, String lastName, int id, int day, int month, int year) {
+        super(firstName, lastName, id, day, month, year);
     }
-
-    public Undergrad(String firstName, String lastName, int id) {
-        super(firstName,lastName);
-    }
-
 
     public enum Level {
         FRESHMAN, SOPHOMORE, JUNIOR, SENIOR

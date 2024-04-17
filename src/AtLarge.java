@@ -5,7 +5,7 @@ public class AtLarge extends Student {
     }
 
     public AtLarge(String firstName, String lastName) {
-        super(firstName,lastName);
+        super(firstName, lastName, 0, 0, 0, 0);
     }
 
     public String toString() {
