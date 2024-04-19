@@ -27,10 +27,16 @@ public class Student extends Person {
         this.id = id;
     }
 
-    public void addCourse(Course course) {
+    public void addCourse(Course course, Semester semester) {
+        if (course.getSemester().equals(semester)) {
+            enrolledCourses.add(course);
+        }
     }
 
-    public void dropCourse(Course course) {
+    public void dropCourse(Course course, Semester semester) {
+        if (course.getSemester().equals(semester)) {
+            enrolledCourses.remove(course);
+        }
     }
 
     public List<Course> getEnrolledCourses() {
