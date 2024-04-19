@@ -13,6 +13,10 @@ public class Undergrad extends Student {
         super(firstName, lastName, id, day, month, year);
     }
 
+    public Undergrad(String firstName, String lastName, int id) {
+        super(firstName, lastName, id);
+    }
+
     public enum Level {
         FRESHMAN, SOPHOMORE, JUNIOR, SENIOR
     }

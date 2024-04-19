@@ -17,12 +17,17 @@ public class Person implements Shopper {
         groceryList = new GroceryList();
     }
 
-
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Person() {
         this.firstName = "";
         this.lastName = "";
     }
+
+
 
     public String getFirstName() {
         return this.firstName;
