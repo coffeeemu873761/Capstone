@@ -6,7 +6,8 @@ public class Course{
     private int credits;
     private int maxStudents;
     private int currentStudents;
-
+    private Professor professor;
+    private Semester semester;
     private HashSet<Student> enrolledStudents;
     private LinkedList<Student> waitlist;
     private boolean full;
@@ -27,11 +28,16 @@ public class Course{
         return (title);
     }
 
-    public void addStudent(Student student) {
+    public void addStudent(Student student, Semester semester) {
         if (currentStudents < maxStudents) {
-            enrolledStudents.add(student); //adds student to course
-            currentStudents++;
-            System.out.println(student.getFirstName() + " " + student.getLastName() + " has been enrolled in " + title);
+            if (this.semester.equals(semester)) {
+                enrolledStudents.add(student);
+                currentStudents++;
+                System.out.println(student.getFirstName() + " " + student.getLastName() + " has been enrolled in " + title);
+            } else {
+                System.out.println("This course is not available this semester");
+                return;
+            }
         } else {
             waitlist.add(student);
             System.out.println(student.getFirstName() + " " + student.getLastName() + " has been added to the waitlist for " + title);
@@ -43,13 +49,23 @@ public class Course{
         }
     }
 
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
+
     public void dropStudent(Student student) {
         if (enrolledStudents.contains((Object)student)) {
-            enrolledStudents.remove((Object)student); //drops student from course
-            currentStudents--;
-            System.out.println(student.getFirstName() + " " + student.getLastName() + " has been un-enrolled from " + title);
+            if (this.semester.equals(semester)) {
+                enrolledStudents.remove(student);
+                currentStudents--;
+                System.out.println(student.getFirstName() + " " + student.getLastName() + " has been un-enrolled from " + title);
+            }
             if (!waitlist.isEmpty()) {
-                addStudent(waitlist.getFirst());
+                addStudent(waitlist.getFirst(), this.semester);
                 waitlist.removeFirst();
             }
             if (currentStudents >= maxStudents) {
@@ -66,23 +82,40 @@ public class Course{
         return credits;
     }
 
-    public void getEnrolledStudents() {
-        Iterator<Student> i = enrolledStudents.iterator();
-        while (i.hasNext()) {
-            Student v = i.next();
-            System.out.print(v.getFirstName() + " " + v.getLastName() + ", ");
-        }
+    public Set<Student> getEnrolledStudents() {
+        return enrolledStudents;
     }
 
-    public void getWaitlist() {
-        Iterator<Student> j = waitlist.iterator();
-        while (j.hasNext()) {
-            Student k = j.next();
-            System.out.print(k.getFirstName() + " " + k.getLastName() + ", ");
-        }
+    public List<Student> getWaitlist() {
+        return waitlist;
+    }
+
+    public Semester getSemester() {
+        return this.semester;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 
     public boolean isFull() {
         return full;
+    }
+
+    // Edited getters
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public int getMaxStudents() {
+        return maxStudents;
+    }
+
+    public int getCurrentStudents() {
+        return currentStudents;
     }
 }

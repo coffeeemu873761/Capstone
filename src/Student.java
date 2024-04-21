@@ -17,16 +17,6 @@ public class Student extends Person {
         this.enrolledCourses = new ArrayList<>();
     }
 
-    public Student(String firstName, String lastName, int id) {
-
-    }
-
-    public Student(String firstName, String lastName) {
-    }
-
-    public Student(String firstName, String lastName, int id, int day, int month, int year) {
-    }
-
     public int getId() {
 
         return this.id;
@@ -38,41 +28,36 @@ public class Student extends Person {
     }
 
     public void addCourse(Course course) {
-        if (!enrolledCourses.contains(course)) {
-            enrolledCourses.add(course);
-            course.addStudent(this);
-        }
     }
 
     public void dropCourse(Course course) {
-        if (enrolledCourses.contains(course)) {
-            enrolledCourses.remove(course);
-            course.removeStudent(this);
-        }
     }
 
     public List<Course> getEnrolledCourses() {
 
-        return new ArrayList<>(enrolledCourses);
+        return this.enrolledCourses;
     }
 
     public int getTotalCreditHours() {
-        int total = 0;
-        for (Course course : enrolledCourses) {
-            total += course.getCredits();
-        }
-        return total;
-    }
 
+        return 0;
+    }
 
     @Override
     public String toString() {
-        return getLastName(); // Just returning last name doesn't seem appropriate. You might want to adjust this.
+        return super.toString();
     }
 
-    // Method to get the full name of the student
     public String getName() {
 
         return getFirstName() + " " + getLastName();
+    }
+
+    public String getFirstName() {
+        return super.getFirstName();
+    }
+
+    public String getLastName() {
+        return super.getLastName();
     }
 }
