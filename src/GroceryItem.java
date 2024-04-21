@@ -11,5 +11,17 @@ public class GroceryItem {
         return name;
     }
 
+    public boolean equals(Object o) {
+        if (o instanceof GroceryItem) {
+            GroceryItem g = (GroceryItem) o;
+            return this.name.equals(g.name);
+        } else {
+            return false;
+        }
+
+    }
+
+
+
 
 }
