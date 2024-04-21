@@ -88,6 +88,7 @@ public class GroceryTester {
 
         } else if (store.equals(store2.getName())) {
             person.startGroceryList(store2);
+            store2.printItemsAndPrices();
             Usedstore = store2;
 
         } else {
@@ -116,7 +117,7 @@ public class GroceryTester {
                 } else if (Objects.equals(answer, "yes")) {
                     truth1 = false;
                 } else {
-                    System.out.println("Answer unclear");
+                    System.out.println("Answer unclear/no item in store");
                 }
             }
         }
