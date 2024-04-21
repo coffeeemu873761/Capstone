@@ -82,21 +82,14 @@ public class Course{
         return credits;
     }
 
-    public void getEnrolledStudents() {
-        Iterator<Student> i = enrolledStudents.iterator();
-        while (i.hasNext()) {
-            Student v = i.next();
-            System.out.print(v.getFirstName() + " " + v.getLastName() + ", ");
-        }
+    public Set<Student> getEnrolledStudents() {
+        return enrolledStudents;
     }
 
-    public void getWaitlist() {
-        Iterator<Student> j = waitlist.iterator();
-        while (j.hasNext()) {
-            Student k = j.next();
-            System.out.print(k.getFirstName() + " " + k.getLastName() + ", ");
-        }
+    public List<Student> getWaitlist() {
+        return waitlist;
     }
+
     public Semester getSemester() {
         return this.semester;
     }
@@ -104,7 +97,25 @@ public class Course{
     public String getTitle() {
         return this.title;
     }
+
     public boolean isFull() {
         return full;
+    }
+
+    // Edited getters
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public int getMaxStudents() {
+        return maxStudents;
+    }
+
+    public int getCurrentStudents() {
+        return currentStudents;
     }
 }
