@@ -38,7 +38,7 @@ public class GroceryTester {
         Semester semester4 = new Semester("Fall 2024");
 
         // Create Courses
-        Course course1 = new Course("CS", "Computer Science 101", 3, 30);
+        Course course1 = new Course("CS", "Computer Science 101", 3, 2);
         course1.setProfessor(professor1);
         course1.setSemester(semester1);
 
@@ -53,6 +53,24 @@ public class GroceryTester {
         Course course4 = new Course("BIO", "Biology 101", 3, 30);
         course4.setProfessor(professor4);
         course4.setSemester(semester4);
+
+        Student student1 = new Student("Davide", "Mazzucco", 1111, 12, 3, 2002 );
+        Student student2 = new Student("Jim", "Smith", 1251, 11, 7, 2001 );
+        Student student3 = new Student("Jack", "Black", 8711, 11, 11, 2003 );
+
+        course1.addStudent(student1,semester1);
+
+        course1.addStudent(student2,semester1);
+
+        course1.addStudent(student3,semester1);
+
+        course4.addStudent(student2,semester2);
+
+        course3.addStudent(student3,semester3);
+
+        course3.addStudent(student2,semester4);
+
+        course2.addStudent(student3,semester4);
 
         Personquestions(Marianos, WholeFoods);
         CourseQuestions(course1, course2, course3, course4);

@@ -32,6 +32,7 @@ public class Course{
         if (currentStudents < maxStudents) {
             if (this.semester.equals(semester)) {
                 enrolledStudents.add(student);
+                student.addCourse(this);
                 currentStudents++;
                 System.out.println(student.getFirstName() + " " + student.getLastName() + " has been enrolled in " + title);
             } else {

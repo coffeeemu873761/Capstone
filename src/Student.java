@@ -28,9 +28,11 @@ public class Student extends Person {
     }
 
     public void addCourse(Course course) {
+        enrolledCourses.add(course);
     }
 
     public void dropCourse(Course course) {
+        enrolledCourses.remove(course);
     }
 
     public List<Course> getEnrolledCourses() {
