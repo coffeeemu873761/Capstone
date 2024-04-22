@@ -7,6 +7,7 @@ public class Semester {
         this.name = name;
         this.courses = new ArrayList<>();
     }
-
-    // getters and setters
+    public String getName() {
+        return this.name;
+    }
 }
