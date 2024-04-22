@@ -1,6 +1,4 @@
-
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 public class GroceryTester {
     public static void main(String[] args) {
         // Create GroceryStores
@@ -28,10 +26,36 @@ public class GroceryTester {
         WholeFoods.stockItem(item1, 1.25);
         WholeFoods.stockItem(item2, 1.75);
 
+        Professor professor1 = new Professor("John", "Doe", "Computer Science", "101");
+        Professor professor2 = new Professor("Jane", "Doe", "Mathematics", "102");
+        Professor professor3 = new Professor("Mark", "Smith", "Physics", "103");
+        Professor professor4 = new Professor("Emma", "Johnson", "Biology", "104");
+
+        // Create Semesters
+        Semester semester1 = new Semester("Fall 2023");
+        Semester semester2 = new Semester("Spring 2024");
+        Semester semester3 = new Semester("Summer 2024");
+        Semester semester4 = new Semester("Fall 2024");
+
+        // Create Courses
+        Course course1 = new Course("CS", "Computer Science 101", 3, 30);
+        course1.setProfessor(professor1);
+        course1.setSemester(semester1);
+
+        Course course2 = new Course("MATH", "Mathematics 101", 3, 30);
+        course2.setProfessor(professor2);
+        course2.setSemester(semester2);
+
+        Course course3 = new Course("PHYS", "Physics 101", 3, 30);
+        course3.setProfessor(professor3);
+        course3.setSemester(semester3);
+
+        Course course4 = new Course("BIO", "Biology 101", 3, 30);
+        course4.setProfessor(professor4);
+        course4.setSemester(semester4);
 
         Personquestions(Marianos, WholeFoods);
-
-
+        CourseQuestions(course1, course2, course3, course4);
     }
     public static void Personquestions(GroceryStore store1, GroceryStore store2) {
         Scanner scanner = new Scanner(System.in);
@@ -74,7 +98,68 @@ public class GroceryTester {
         }
     }
 
+    public static void CourseQuestions(Course course1, Course course2, Course course3, Course course4) {
+        Scanner scanner = new Scanner(System.in);
 
+        List<Course> courses = Arrays.asList(course1, course2, course3, course4);
+
+        System.out.println("Here are the available courses:");
+        for (int i = 0; i < courses.size(); i++) {
+            System.out.println((i + 1) + ". " + courses.get(i).getTitle());
+        }
+
+        System.out.print("Enter the number of the course you want to interact with: ");
+        int courseNumber = scanner.nextInt();
+        scanner.nextLine();  // Consume newline left-over
+
+        if (courseNumber < 1 || courseNumber > courses.size()) {
+            System.out.println("Invalid course number");
+            return;
+        }
+
+        Course course = courses.get(courseNumber - 1);
+
+        System.out.println("What do you want to do with this course?");
+        System.out.println("1. Print course details");
+        System.out.println("2. Print enrolled students");
+        System.out.println("3. Print waitlist");
+        int choice = scanner.nextInt();
+        scanner.nextLine();  // Consume newline left-over
+
+        switch (choice) {
+            case 1:
+                printCourseDetails(course);
+                break;
+            case 2:
+                printEnrolledStudents(course);
+                break;
+            case 3:
+                printWaitlist(course);
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
+    }
+    public static void printCourseDetails(Course course) {
+        System.out.println("Course Title: " + course.getTitle());
+        System.out.println("Professor: " + course.getProfessor().getFirstName() + " " + course.getProfessor().getLastName());
+        System.out.println("Semester: " + course.getSemester().getName());
+    }
+
+    public static void printEnrolledStudents(Course course) {
+        System.out.println("Enrolled Students in " + course.getTitle() + ": ");
+        for (Student student : course.getEnrolledStudents()) {
+            System.out.println(student.getFirstName() + " " + student.getLastName());
+        }
+    }
+
+    public static void printWaitlist(Course course) {
+        System.out.println("Waitlist for " + course.getTitle() + ": ");
+        for (Student student : course.getWaitlist()) {
+            System.out.println(student.getFirstName() + " " + student.getLastName());
+        }
+    }
 
     public static void GroceryMaker(Person person, GroceryStore store1, GroceryStore store2) {
         boolean truth = true;
